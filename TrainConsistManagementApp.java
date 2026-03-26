@@ -1,11 +1,12 @@
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
- * UC7: Sort Bogies by Capacity using Comparator
- * Demonstrates sorting of custom objects based on business logic.
+ * UC8: Filter Passenger Bogies using Stream API
+ * Demonstrates filtering using functional programming style.
  *
  * @author Anurag
- * @version 7.0
+ * @version 8.0
  */
 
 public class TrainConsistManagementApp {
@@ -35,27 +36,34 @@ public class TrainConsistManagementApp {
         System.out.println("  Train Consist Management App");
         System.out.println("======================================");
 
-        // Create List of Bogies
+        // Create bogie list (same as UC7)
         List<Bogie> bogies = new ArrayList<>();
 
-        // Add bogies
         bogies.add(new Bogie("Sleeper", 72));
         bogies.add(new Bogie("AC Chair", 60));
         bogies.add(new Bogie("First Class", 24));
 
-        System.out.println("\nBefore Sorting:");
+        System.out.println("\nAll Bogies:");
         for (Bogie b : bogies) {
             System.out.println(b.getName() + " → " + b.getCapacity());
         }
 
-        // Sort using Comparator (ascending order)
-        bogies.sort(Comparator.comparingInt(Bogie::getCapacity));
+        // Apply Stream filtering (capacity > 60)
+        List<Bogie> filteredBogies = bogies.stream()
+                .filter(b -> b.getCapacity() > 60)
+                .collect(Collectors.toList());
 
-        System.out.println("\nAfter Sorting (By Capacity - Ascending):");
-        for (Bogie b : bogies) {
-            System.out.println(b.getName() + " → " + b.getCapacity());
+        System.out.println("\nFiltered Bogies (Capacity > 60):");
+
+        if (filteredBogies.isEmpty()) {
+            System.out.println("No bogies match the criteria.");
+        } else {
+            for (Bogie b : filteredBogies) {
+                System.out.println(b.getName() + " → " + b.getCapacity());
+            }
         }
 
-        System.out.println("\nNow bogies are ordered based on capacity for planning.");
+        System.out.println("\nOriginal list remains unchanged:");
+        System.out.println("Total Bogies: " + bogies.size());
     }
 }
