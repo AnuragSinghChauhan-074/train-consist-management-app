@@ -2,11 +2,11 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * UC8: Filter Passenger Bogies using Stream API
- * Demonstrates filtering using functional programming style.
+ * UC9: Group Bogies by Type using groupingBy
+ * Demonstrates categorizing bogies into structured groups.
  *
  * @author Anurag
- * @version 8.0
+ * @version 9.0
  */
 
 public class TrainConsistManagementApp {
@@ -36,34 +36,41 @@ public class TrainConsistManagementApp {
         System.out.println("  Train Consist Management App");
         System.out.println("======================================");
 
-        // Create bogie list (same as UC7)
+        // Create bogie list
         List<Bogie> bogies = new ArrayList<>();
 
         bogies.add(new Bogie("Sleeper", 72));
         bogies.add(new Bogie("AC Chair", 60));
+        bogies.add(new Bogie("Sleeper", 72));   // duplicate type for grouping
         bogies.add(new Bogie("First Class", 24));
+        bogies.add(new Bogie("AC Chair", 60));
 
         System.out.println("\nAll Bogies:");
         for (Bogie b : bogies) {
             System.out.println(b.getName() + " → " + b.getCapacity());
         }
 
-        // Apply Stream filtering (capacity > 60)
-        List<Bogie> filteredBogies = bogies.stream()
-                .filter(b -> b.getCapacity() > 60)
-                .collect(Collectors.toList());
+        // Group bogies by type (name)
+        Map<String, List<Bogie>> groupedBogies = bogies.stream()
+                .collect(Collectors.groupingBy(Bogie::getName));
 
-        System.out.println("\nFiltered Bogies (Capacity > 60):");
+        System.out.println("\nGrouped Bogies:");
 
-        if (filteredBogies.isEmpty()) {
-            System.out.println("No bogies match the criteria.");
-        } else {
-            for (Bogie b : filteredBogies) {
-                System.out.println(b.getName() + " → " + b.getCapacity());
+        // Display grouped result
+        for (Map.Entry<String, List<Bogie>> entry : groupedBogies.entrySet()) {
+
+            String type = entry.getKey();
+            List<Bogie> groupList = entry.getValue();
+
+            System.out.println("\n" + type + " Bogies:");
+
+            for (Bogie b : groupList) {
+                System.out.println("Capacity: " + b.getCapacity());
             }
         }
 
-        System.out.println("\nOriginal list remains unchanged:");
-        System.out.println("Total Bogies: " + bogies.size());
+        System.out.println("\nTotal Categories: " + groupedBogies.size());
+
+        System.out.println("\nOriginal list remains unchanged: " + bogies.size());
     }
 }
