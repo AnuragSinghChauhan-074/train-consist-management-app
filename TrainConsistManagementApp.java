@@ -1,11 +1,11 @@
 import java.util.*;
 
 /**
- * UC2: Add Passenger Bogies to Train
- * Demonstrates ArrayList operations like add, remove, contains.
+ * UC3: Track Unique Bogie IDs
+ * Demonstrates use of HashSet to prevent duplicate bogie IDs.
  *
  * @author Anurag
- * @version 2.0
+ * @version 3.0
  */
 
 public class TrainConsistManagementApp {
@@ -16,32 +16,21 @@ public class TrainConsistManagementApp {
         System.out.println("  Train Consist Management App");
         System.out.println("======================================");
 
-        // Create ArrayList for passenger bogies
-        List<String> passengerBogies = new ArrayList<>();
+        // Create HashSet for unique bogie IDs
+        Set<String> bogieIds = new HashSet<>();
 
-        // ADD bogies
-        passengerBogies.add("Sleeper");
-        passengerBogies.add("AC Chair");
-        passengerBogies.add("First Class");
+        // ADD bogie IDs (including duplicates intentionally)
+        bogieIds.add("BG101");
+        bogieIds.add("BG102");
+        bogieIds.add("BG103");
+        bogieIds.add("BG101"); // duplicate
+        bogieIds.add("BG102"); // duplicate
 
-        System.out.println("\nPassenger Bogies after addition:");
-        System.out.println(passengerBogies);
+        System.out.println("\nBogie IDs after insertion (duplicates ignored):");
+        System.out.println(bogieIds);
 
-        // REMOVE one bogie
-        passengerBogies.remove("AC Chair");
+        System.out.println("\nTotal Unique Bogies: " + bogieIds.size());
 
-        System.out.println("\nAfter removing AC Chair:");
-        System.out.println(passengerBogies);
-
-        // CHECK existence
-        boolean exists = passengerBogies.contains("Sleeper");
-
-        System.out.println("\nDoes Sleeper bogie exist? " + exists);
-
-        // FINAL STATE
-        System.out.println("\nFinal Passenger Bogies:");
-        System.out.println(passengerBogies);
-
-        System.out.println("\nSystem ready for next operations...");
+        System.out.println("\nSystem ensures no duplicate bogie IDs.");
     }
 }
