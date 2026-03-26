@@ -1,11 +1,11 @@
 import java.util.*;
 
 /**
- * UC5: Preserve Insertion Order of Bogies using LinkedHashSet
- * Demonstrates uniqueness + order preservation.
+ * UC6: Map Bogie to Capacity using HashMap
+ * Demonstrates key-value mapping of bogies to capacity.
  *
  * @author Anurag
- * @version 5.0
+ * @version 6.0
  */
 
 public class TrainConsistManagementApp {
@@ -16,23 +16,27 @@ public class TrainConsistManagementApp {
         System.out.println("  Train Consist Management App");
         System.out.println("======================================");
 
-        // Create LinkedHashSet for train formation
-        Set<String> trainFormation = new LinkedHashSet<>();
+        // Create HashMap for bogie → capacity
+        Map<String, Integer> bogieCapacityMap = new HashMap<>();
 
-        // Add bogies
-        trainFormation.add("Engine");
-        trainFormation.add("Sleeper");
-        trainFormation.add("Cargo");
-        trainFormation.add("Guard");
+        // Add bogie-capacity mappings
+        bogieCapacityMap.put("Sleeper", 72);
+        bogieCapacityMap.put("AC Chair", 60);
+        bogieCapacityMap.put("First Class", 24);
 
-        // Add duplicate intentionally
-        trainFormation.add("Sleeper"); // duplicate
+        System.out.println("\nBogie Capacity Details:");
 
-        System.out.println("\nTrain Formation (Insertion Order Preserved):");
-        System.out.println(trainFormation);
+        // Iterate using entrySet
+        for (Map.Entry<String, Integer> entry : bogieCapacityMap.entrySet()) {
 
-        System.out.println("\nTotal Bogies: " + trainFormation.size());
+            String bogie = entry.getKey();
+            int capacity = entry.getValue();
 
-        System.out.println("\nDuplicate bogies are automatically ignored.");
+            System.out.println(bogie + " → Capacity: " + capacity);
+        }
+
+        System.out.println("\nTotal Bogie Types: " + bogieCapacityMap.size());
+
+        System.out.println("\nSystem can now map bogies to real-world attributes.");
     }
 }
